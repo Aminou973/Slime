@@ -133,7 +133,7 @@ td.vf { font-weight: 600; }
       <button class="btn primary" id="resumeBtn" type="button">Reprendre la lecture</button>
       <div class="meter" aria-live="polite">
         <div class="meter-bar"><div class="meter-fill" id="meterFill"></div></div>
-        <div class="meter-txt" id="meterTxt">0 / 27 chapitres lus</div>
+        <div class="meter-txt" id="meterTxt">0 chapitres lus</div>
       </div>
     </div>
   </header>
@@ -145,11 +145,7 @@ td.vf { font-weight: 600; }
   </nav>
 
   <section id="view-read" role="tabpanel" aria-labelledby="tab-read" style="display:grid;gap:28px">
-    <div class="arc-head">
-      <div class="kicker">Arc 8 · PDF p. 4283–5137 · fichier 08 du dossier Tomes</div>
-      <h2>L'Empire envahit !</h2>
-      <p>Un an après la fuite de Yûki, l'Empire de l'Est lance son armée contre Tempest. Ces 27 planches couvrent tout l'arc, du chapitre 137 au chapitre 161, plus deux interludes.</p>
-    </div>
+    <nav class="meta" id="arcNav" aria-label="Arcs"></nav>
     <div id="planches" style="display:grid;gap:28px"></div>
   </section>
 
@@ -187,61 +183,116 @@ td.vf { font-weight: 600; }
 
 <script>
 const CH = [
- {id:"c137", n:"137", t:"Une année de progrès", p:4284, scene:"rail", sfx:"TCHOU !", who:["Limule","Milim","Ramiris","Veldora","Frey"],
+ {arc:8, id:"c137", n:"137", t:"Une année de progrès", p:4284, scene:"rail", sfx:"TCHOU !", who:["Limule","Milim","Ramiris","Veldora","Frey"],
   s:"Après la fuite de Yûki vers l'Empire, Limule, Leon et Luminus décident d'agir ensemble mais sans se précipiter. Leon s'occupe du renseignement, Limule doit calmer Milim. Le dragon du chaos renaît en petit dragon, Gaia, et toute la bande l'emmène s'entraîner dans le labyrinthe jusqu'à ce que Frey vienne récupérer Milim. En un an, Tempest construit des routes vers Sarion, une voie ferrée vers le royaume nain et un centre de recherche secret au 95e étage. Nains, sorciers, ingénieurs et chercheurs vampires y mettent leurs savoirs en commun. Il en sort une armure spirituelle pour Ramiris et un train à énergie magique. Pendant ce temps, l'Empire se prépare, et le Conseil invite Limule."},
- {id:"c138", n:"138", t:"La requête du Conseil", p:4311, scene:"cake", sfx:"MIAM", who:["Hinata","Limule","Benimaru","Shuna","Sôei"],
+ {arc:8, id:"c138", n:"138", t:"La requête du Conseil", p:4311, scene:"cake", sfx:"MIAM", who:["Hinata","Limule","Benimaru","Shuna","Sôei"],
   s:"Les pays voisins de la forêt de Jura paniquent face aux mouvements de l'Empire. Au Conseil, certains veulent enrôler de force les aventuriers. Hinata, qui dirige le nouveau comité d'arbitrage, propose plutôt de confier la défense à Tempest. Limule part pour Ingrasia avec Benimaru, Shuna et Sôei. Entre deux discussions stratégiques, il découvre une pâtisserie au goût de son ancien monde et compte sur Shuna pour le retrouver."},
- {id:"c139", n:"139", t:"Le fin mot de l'assemblée", p:4336, scene:"council", sfx:"CRAAC !", who:["Limule","Shuna","Hinata","Sôei"],
+ {arc:8, id:"c139", n:"139", t:"Le fin mot de l'assemblée", p:4336, scene:"council", sfx:"CRAAC !", who:["Limule","Shuna","Hinata","Sôei"],
   s:"À l'assemblée, des délégués achetés, menés par le prince Elric d'Ingrasia, essaient d'humilier Limule et font entrer le chevalier Reiner pour le « soumettre ». Limule perd patience et pulvérise la table. Shuna envoie Reiner au tapis d'un simple coup d'éventail. Sôei sort les registres des pots-de-vin, et l'assemblée vote tout ce que Limule voulait : coopération militaire, droit de passage, et transfert à Tempest du siège du Conseil et du comité d'arbitrage. En prime, Shuna convainc le pâtissier Kirsch de venir s'installer à Tempest."},
- {id:"c140", n:"140", t:"Résultats de recherche", p:4383, scene:"forge", sfx:"KLANG", who:["Limule","Shion","Kurobe","Kaijin"],
+ {arc:8, id:"c140", n:"140", t:"Résultats de recherche", p:4383, scene:"forge", sfx:"KLANG", who:["Limule","Shion","Kurobe","Kaijin"],
   s:"Limule étudie les routes d'invasion possibles et installe des cercles de téléportation un peu partout. Shion lui sert un « gâteau » gris à la texture de konnyaku, ce qui lui vaut un long sermon sur la cuisine. Kurobe et Kaijin présentent une épée percée d'emplacements : on y glisse des noyaux élémentaires pour changer son attribut. Enfin, l'acier magique que Limule faisait mûrir en lui est devenu un métal légendaire, de quoi forger enfin son propre katana."},
- {id:"c141", n:"141", t:"Un invité inattendu", p:4412, scene:"lab", sfx:"BLOUP", who:["Limule","Dino","Ramiris","Veldora","Bester"],
+ {arc:8, id:"c141", n:"141", t:"Un invité inattendu", p:4412, scene:"lab", sfx:"BLOUP", who:["Limule","Dino","Ramiris","Veldora","Bester"],
   s:"Le katana est un chef-d'œuvre de classe divine. Dino, l'un des seigneurs démons, débarque : chassé par Dagruel, il arrive avec une lettre de Guy Crimson et veut vivre à Tempest sans travailler. Limule en fait l'assistant de Ramiris. Au laboratoire, Ramiris, Veldora et Bester font pousser un millier de golems d'os en acier magique dans des capsules. Il leur manque une âme et un moyen de gérer les attributs, et les noyaux de Kurobe pourraient régler le second problème."},
- {id:"c142", n:"142", t:"Affaires militaires", p:4449, scene:"army", sfx:"EN AVANT !", who:["Gobta","Hakurô","Geld","Gabil","Benimaru","Masayuki"],
+ {arc:8, id:"c142", n:"142", t:"Affaires militaires", p:4449, scene:"army", sfx:"EN AVANT !", who:["Gobta","Hakurô","Geld","Gabil","Benimaru","Masayuki"],
   s:"Limule réorganise l'armée. Le premier corps revient à Gobta, conseillé par Hakurô. Le deuxième, à Geld, surtout composé de bâtisseurs. Le troisième, aérien, à Gabil, avec les Hiryû et des chevaucheurs de wyvernes. Benimaru commande l'ensemble avec sa garde Crimson. Sôei garde ses espions de l'ombre, Shion sa troupe d'immortels. Avec les monstres de la forêt, les mercenaires du Conseil et les aventuriers volontaires confiés à Masayuki, Tempest peut aligner environ 170 000 combattants. L'Empire, lui, a fini ses préparatifs."},
- {id:"c143", n:"143", t:"Le corps de la terreur", p:4469, scene:"abyss", sfx:"KUFUFU…", who:["Diablo","Testarossa","Ultima","Carrera","Treyni"],
+ {arc:8, id:"c143", n:"143", t:"Le corps de la terreur", p:4469, scene:"abyss", sfx:"KUFUFU…", who:["Diablo","Testarossa","Ultima","Carrera","Treyni"],
   s:"Benimaru s'étonne que Gobta soit général, mais accepte. Treyni et les dryades testent les golems du labo : en les habitant, elles obtiennent enfin un vrai corps. Diablo revient de l'enfer avec dix démons qu'il a « convaincus », dont trois archidémons. Limule les installe dans les golems et les nomme : Testarossa, Ultima et Carrera, puis Venom, Veyron, Moss, Cien, Zonda, Agera et Esprit. Ils deviennent des ducs démons, et 700 démons mineurs les suivent. Ainsi naissent les Black Numbers, l'unité la plus redoutée de Tempest."},
- {id:"i1", n:"Interlude", t:"L'histoire de Venom", p:4512, scene:"hell", sfx:"GRRR", who:["Venom","Diablo","Testarossa"],
+ {arc:8, id:"i1", n:"Interlude", t:"L'histoire de Venom", p:4512, scene:"hell", sfx:"GRRR", who:["Venom","Diablo","Testarossa"],
   s:"Venom raconte sa vie : un voyou humain mort poignardé, réincarné en démon mineur dans le monde des esprits. Il y gagne le pouvoir de diviser, de fusionner et de se régénérer, et une bande de cent démons. Puis un démon aux cheveux rouges, Diablo, les balaie tous. Invoqué plus tard par Diablo devant Limule, il jure fidélité, reçoit son nom et devient archidémon. Son rêve : prendre un jour la place de Testarossa comme bras droit de Diablo."},
- {id:"c144", n:"144", t:"Labyrinthe (1) : l'escouade d'éclaireurs", p:4536, scene:"empire", sfx:"…", who:["Yûki","Kagali","Damrada","Kondô","Shinji"],
+ {arc:8, id:"c144", n:"144", t:"Labyrinthe (1) : l'escouade d'éclaireurs", p:4536, scene:"empire", sfx:"…", who:["Yûki","Kagali","Damrada","Kondô","Shinji"],
   s:"Dans l'Empire, Yûki commande déjà un corps d'armée. Damrada, de l'organisation Cerberus, lui fait un rapport sur Tempest, et Yûki donne des missions à Vega et à Miranda. Le lieutenant Kondô Tatsuya, chef du renseignement, est un otherworlder qui ne vieillit plus depuis 70 ans. Il se méfie de Yûki et attend son premier faux pas. Trois otherworlders, Shinji Tanimura, Mark Lauren et Zhen Liu Xing, partent explorer le labyrinthe de Tempest pour découvrir ce qu'il cache."},
- {id:"c145", n:"145", t:"Labyrinthe (2) : une force irrésistible", p:4571, scene:"labyrinth", sfx:"VLAN !", who:["Limule","Ramiris","Veldora","Shinji","Mark","Zhen"],
+ {arc:8, id:"c145", n:"145", t:"Labyrinthe (2) : une force irrésistible", p:4571, scene:"labyrinth", sfx:"VLAN !", who:["Limule","Ramiris","Veldora","Shinji","Mark","Zhen"],
   s:"Trois nouveaux venus battent Gozul au 50e étage, un record. Limule, Ramiris et Veldora suivent leur progression sur grand écran. Mark peut lancer n'importe quoi, de l'air aux rochers en passant par les monstres. Zhen repère tous les pièges. Shinji se bat avec des poisons et des gaz grâce à une compétence de médecin. Limule compte sur Adalman, gardien du 60e étage, tout en craignant que la hache bénie trouvée par Mark lui donne l'avantage."},
- {id:"c146", n:"146", t:"Labyrinthe (3) : le verdict", p:4598, scene:"undead", sfx:"HOOO…", who:["Adalman","Albert","Ramiris","Zegion","Apito","Kumara"],
+ {arc:8, id:"c146", n:"146", t:"Labyrinthe (3) : le verdict", p:4598, scene:"undead", sfx:"HOOO…", who:["Adalman","Albert","Ramiris","Zegion","Apito","Kumara"],
   s:"Adalman, ancien prêtre devenu roi fantôme, et son chevalier Albert veulent prouver leur foi envers Limule. Les trois espions profitent de la ville du labyrinthe et de sa cuisine japonaise, puis atteignent le 60e étage, où ils se font balayer : Adalman a appris une inversion qui annule sa faiblesse au sacré. Ramiris avoue que les gardiens sont devenus monstrueux : Zegion, Apito, Kumara et quatre rois dragons. Limule réorganise les étages pour protéger les visiteurs, et les trois intrus repartent."},
- {id:"c147", n:"147", t:"L'Empire se met en marche", p:4642, scene:"empire", sfx:"HMM…", who:["Yûki","Shinji","Mark","Zhen"],
+ {arc:8, id:"c147", n:"147", t:"L'Empire se met en marche", p:4642, scene:"empire", sfx:"HMM…", who:["Yûki","Shinji","Mark","Zhen"],
   s:"De retour, les trois racontent à Yûki que le 60e étage est imbattable et qu'une installation se cache sûrement derrière. Ils rêvent de quitter l'armée pour aller vivre dans la ville du labyrinthe. Shinji se souvient d'un ancien massacre causé par un archidémon. Calgurio, chef du Corps blindé, voit passer leurs armes à emplacements et leurs cristaux très purs, et sa cupidité s'éveille. C'est exactement ce que Yûki voulait."},
- {id:"c148", n:"148", t:"Une décision trop tardive", p:4684, scene:"empire", sfx:"CLAC", who:["Gadra","Shinji","Mark","Zhen"],
+ {arc:8, id:"c148", n:"148", t:"Une décision trop tardive", p:4684, scene:"empire", sfx:"CLAC", who:["Gadra","Shinji","Mark","Zhen"],
   s:"Shinji montre le bracelet de résurrection à son maître, le grand mage Gadra. Celui-ci ne parvient pas à l'analyser et devine que le labyrinthe appartient à Ramiris, « la fée du labyrinthe ». Il juge très dangereux de provoquer Limule. Les trois amis décident enfin de mieux se renseigner, mais des soldats entrent dans la pièce : il est trop tard pour fuir."},
- {id:"c149", n:"149", t:"La veille de la guerre", p:4705, scene:"empire", sfx:"EN GUERRE", who:["Gadra","Calgurio","Gladim","Yûki","Rudra","Velgrynd"],
+ {arc:8, id:"c149", n:"149", t:"La veille de la guerre", p:4705, scene:"empire", sfx:"EN GUERRE", who:["Gadra","Calgurio","Gladim","Yûki","Rudra","Velgrynd"],
   s:"Au grand conseil impérial, Gadra s'oppose à la guerre. Calgurio le traite de vieux peureux et présente le Corps blindé : soldats remodelés, 4 000 chars magiques, 400 dirigeables et des annulateurs de magie pour neutraliser Veldora. Yûki pousse discrètement à l'attaque et propose une offensive par le nord. Calgurio doit alors dévoiler ses dirigeables, qui transporteront le Corps des bêtes de Gladim. Le soir, l'empereur Rudra et Velgrynd, la sœur de Veldora, révèlent leur vrai but : capturer Veldora et vaincre Guy. L'armée se met en route."},
- {id:"c150", n:"150", t:"Les prévisions se réalisent", p:4748, scene:"eyes", sfx:"BIP BIP", who:["Limule","Gadra","Shinji","Mark","Zhen"],
+ {arc:8, id:"c150", n:"150", t:"Les prévisions se réalisent", p:4748, scene:"eyes", sfx:"BIP BIP", who:["Limule","Gadra","Shinji","Mark","Zhen"],
   s:"Limule inaugure sa salle de contrôle au 100e étage, avec des « satellites » magiques qui surveillent tout le territoire et peuvent même tirer Megiddo. Shinji, Mark et Zhen font défection avec Gadra. On leur avait posé une bombe dans le cœur ; ils s'en sont débarrassés en mourant volontairement dans le labyrinthe. Gadra est un réincarné qui a déjà affronté Veldora, et un vieil ami d'Adalman. Limule les accueille et décide de laisser l'Empire attaquer le premier."},
- {id:"c151", n:"151", t:"La guerre éclate : le début", p:4774, scene:"tanks", sfx:"VROOOM", who:["Benimaru","Testarossa","Ultima","Gobta","Gabil","Masayuki"],
+ {arc:8, id:"c151", n:"151", t:"La guerre éclate : le début", p:4774, scene:"tanks", sfx:"VROOOM", who:["Benimaru","Testarossa","Ultima","Gobta","Gabil","Masayuki"],
   s:"Grâce à la surveillance, Tempest voit tout : les chars, les dirigeables, environ un million de soldats. Limule fixe une seule règle : ne pas toucher aux civils. La ville du labyrinthe est mise à l'abri au 101e étage, et Masayuki récolte les louanges sans avoir rien fait. Testarossa accompagne Gobta, Ultima accompagne Gabil. Testarossa avertit le lieutenant-général Gastar que franchir la ligne, c'est mourir. Un tireur lui tire dessus ; elle attrape la balle du bout du doigt. Les chars avancent : la guerre commence."},
- {id:"c152", n:"152", t:"La guerre éclate : agitation et résolution", p:4800, scene:"tanks", sfx:"BOOM", who:["Limule","Benimaru","Gobta","Gabil"],
+ {arc:8, id:"c152", n:"152", t:"La guerre éclate : agitation et résolution", p:4800, scene:"tanks", sfx:"BOOM", who:["Limule","Benimaru","Gobta","Gabil"],
   s:"Benimaru refuse que Limule utilise Megiddo : l'ennemi s'adapterait, et le pays doit apprendre à se défendre seul. Gobta harcèle les chars, Gabil abat trois dirigeables, mais les canons magiques font les premiers blessés. Limule veut partir au front ; Benimaru l'en empêche. Limule accepte de faire confiance aux siens et leur ordonne de ne plus rien retenir."},
- {id:"c153", n:"153", t:"La guerre éclate : le piétinement", p:4826, scene:"lightning", sfx:"BZZZT !", who:["Gobta","Ranga","Gabil","Ultima"],
+ {arc:8, id:"c153", n:"153", t:"La guerre éclate : le piétinement", p:4826, scene:"lightning", sfx:"BZZZT !", who:["Gobta","Ranga","Gabil","Ultima"],
   s:"Libérés, les monstres se déchaînent. Gobta fusionne avec Ranga et pulvérise les chars avec sa « Danse avec les loups ». Gabil et les Hiryû prennent leur forme de dragon et coulent les dirigeables un à un. Ultima s'invite sur le pont du général Faraga, constate que l'annulateur de magie ne lui fait rien, récupère les connaissances de l'équipage et fait exploser le vaisseau. La flotte aérienne disparaît."},
- {id:"c154", n:"154", t:"La guerre éclate : le démon souriant", p:4861, scene:"death", sfx:"…", who:["Testarossa","Ultima"],
+ {arc:8, id:"c154", n:"154", t:"La guerre éclate : le démon souriant", p:4861, scene:"death", sfx:"…", who:["Testarossa","Ultima"],
   s:"Gastar veut battre en retraite, mais il est trop tard : Testarossa est déjà derrière lui, et ses soldats sont morts sans un bruit. Trois agents du renseignement impérial, qui l'avaient vaincue autrefois, tentent de l'enchaîner. Elle brise leurs chaînes et retourne contre eux leur propre annulateur de magie. Puis elle lance un sort de mort qui ne laisse aucun survivant dans un rayon de 500 mètres. Le quartier général ennemi est anéanti."},
- {id:"c155", n:"155", t:"Première victoire", p:4889, scene:"revival", sfx:"ET DE UN", who:["Limule","Benimaru","Diablo","Shion","Carrera"],
+ {arc:8, id:"c155", n:"155", t:"Première victoire", p:4889, scene:"revival", sfx:"ET DE UN", who:["Limule","Benimaru","Diablo","Shion","Carrera"],
   s:"Les autres démons des Black Numbers achèvent l'avant-garde. Bilan : 240 000 morts côté Empire, aucun côté Tempest grâce aux potions. Limule refuse pour l'instant l'offre de Raphael d'éveiller des subordonnés en seigneurs démons avec les âmes récoltées. L'armée principale de Calgurio, 700 000 hommes, arrive : une partie marche sur la capitale, l'autre se dirige vers le labyrinthe. Shion et Diablo partent au front."},
- {id:"c156", n:"156", t:"Réunion dans le labyrinthe", p:4929, scene:"labyrinth", sfx:"HÉHÉ", who:["Ramiris","Veldora","Zegion","Apito","Kumara","Adalman"],
+ {arc:8, id:"c156", n:"156", t:"Réunion dans le labyrinthe", p:4929, scene:"labyrinth", sfx:"HÉHÉ", who:["Ramiris","Veldora","Zegion","Apito","Kumara","Adalman"],
   s:"Calgurio, sûr de lui, envoie 200 000 soldats sur la capitale et 350 000 dans le labyrinthe, attiré par ses trésors. Ramiris et Veldora réunissent en secret les « Dix Seigneurs du Labyrinthe » : Beretta, Kumara, Zegion, Apito, Adalman, Albert, Gozul, Mezul et les autres. Le plan : 10 000 ennemis par étage, pour que chacun ait sa part. Et surtout, ne rien dire à Limule."},
- {id:"c157", n:"157", t:"La bataille du donjon", p:4957, scene:"swarm", sfx:"BZZZZ", who:["Adalman","Apito","Kumara"],
+ {arc:8, id:"c157", n:"157", t:"La bataille du donjon", p:4957, scene:"swarm", sfx:"BZZZZ", who:["Adalman","Apito","Kumara"],
   s:"Les cordes qui reliaient les soldats à la surface sont coupées. Aux étages 61 à 70, Adalman, son dragon spectral et des chevaliers de la mort qui se relèvent sans fin. Aux étages 71 à 80, les guêpes supersoniques d'Apito. Aux étages 81 à 90, les huit bêtes de Kumara : un singe blanc, des rats porteurs de peste, un tigre de foudre, un lapin qui joue avec la gravité, un serpent qui retire l'oxygène, un mouton hypnotiseur, un oiseau de feu et un chien-miroir. Au bout d'une journée, il n'y a plus un seul survivant."},
- {id:"c158", n:"158", t:"Le plus fort du labyrinthe", p:4986, scene:"golden", sfx:"SHING", who:["Zegion","Limule","Benimaru"],
+ {arc:8, id:"c158", n:"158", t:"Le plus fort du labyrinthe", p:4986, scene:"golden", sfx:"SHING", who:["Zegion","Limule","Benimaru"],
   s:"Sept survivants se retrouvent dans l'antichambre du 80e étage : deux otherworlders, Michelle et Raymond, deux officiers et trois gardes de l'Empereur en armure d'orichalque. Un compte à rebours, puis la porte s'ouvre sur Zegion, assis au sommet d'un tas de soldats. Entraîné par Veldora et renforcé par Raphael, il les écrase en moins d'une minute. Limule, un peu inquiet, demande à Benimaru si Zegion n'est pas plus fort que lui."},
- {id:"c159", n:"159", t:"Défense de la capitale", p:5024, scene:"gravity", sfx:"CRRRUNCH", who:["Geld","Shion","Carrera","Momiji"],
+ {arc:8, id:"c159", n:"159", t:"Défense de la capitale", p:5024, scene:"gravity", sfx:"CRRRUNCH", who:["Geld","Shion","Carrera","Momiji"],
   s:"Devant la capitale, Geld et ses hauts orcs forment un mur infranchissable, soutenus par les mages de Benimaru et ceux de Momiji. Shion et ses 10 000 Yomigaeri sèment la terreur. Dans le ciel, Carrera veut tout raser d'une frappe nucléaire ; sa subordonnée Agera la convainc de viser seulement l'arrière-garde. Un « effondrement gravitationnel » écrase près de 100 000 soldats."},
- {id:"c160", n:"160", t:"Le grand ménage", p:5050, scene:"abyss", sfx:"CLAC", who:["Diablo","Calgurio"],
+ {arc:8, id:"c160", n:"160", t:"Le grand ménage", p:5050, scene:"abyss", sfx:"CLAC", who:["Diablo","Calgurio"],
   s:"Calgurio comprend qu'il a perdu. Krishna, seul revenu du labyrinthe grâce à un vrai bracelet de résurrection, le supplie de battre en retraite. Diablo entre alors dans le quartier général : il a déjà pris l'âme de tous les soldats du camp. Calgurio propose de se rendre, puis attaque Diablo avec une armure divine, sans le moindre effet."},
- {id:"c161", n:"161", t:"Le travail d'un seigneur démon", p:5076, scene:"revival", sfx:"RÉVEIL", who:["Limule","Geld","Diablo","Calgurio"],
+ {arc:8, id:"c161", n:"161", t:"Le travail d'un seigneur démon", p:5076, scene:"revival", sfx:"RÉVEIL", who:["Limule","Geld","Diablo","Calgurio"],
   s:"Calgurio se réveille : Limule l'a ressuscité, avec environ 700 000 soldats dont le corps était intact, grâce à des noyaux d'âme et à l'aide d'Adalman. Ils pourront vivre normalement, mais sans compétences et sans pouvoir nuire à Tempest. Pour manger, ils devront travailler : Calgurio et ses hommes bâtiront une ville industrielle sous les ordres de Geld. Miranda, l'espionne de Yûki, est volontairement laissée fuir pour prévenir l'Empire. 300 dirigeables approchent encore par la mer : la guerre continue."},
- {id:"i2", n:"Interlude", t:"Les réflexions de Shinji", p:5115, scene:"eyes", sfx:"OUF", who:["Shinji","Ramiris","Gadra","Veldora"],
-  s:"Shinji, Mark et Zhen découvrent leur nouvelle patronne : Ramiris. Le salaire est modeste, mais il y a un logement moderne, les repas offerts et des horaires fixes. Depuis la salle de surveillance, ils regardent avec effroi le sort de leurs anciens camarades et remercient Gadra de les avoir fait fuir. Michelle et Raymond, qui ont tenu jusqu'au bout, deviennent eux aussi assistants de Ramiris, et Gadra rejoint Adalman pour gérer le labyrinthe."}
+ {arc:8, id:"i2", n:"Interlude", t:"Les réflexions de Shinji", p:5115, scene:"eyes", sfx:"OUF", who:["Shinji","Ramiris","Gadra","Veldora"],
+  s:"Shinji, Mark et Zhen découvrent leur nouvelle patronne : Ramiris. Le salaire est modeste, mais il y a un logement moderne, les repas offerts et des horaires fixes. Depuis la salle de surveillance, ils regardent avec effroi le sort de leurs anciens camarades et remercient Gadra de les avoir fait fuir. Michelle et Raymond, qui ont tenu jusqu'au bout, deviennent eux aussi assistants de Ramiris, et Gadra rejoint Adalman pour gérer le labyrinthe."},
+ {arc:9, id:"c162", n:"162", t:"Récompenses et évolution (1)", p:5139, scene:"revival", sfx:"FÉLICITATIONS", who:["Limule","Benimaru","Momiji","Gobta","Ranga","Gabil","Geld","Shion"],
+  s:"Grâce aux âmes récoltées, Limule peut éveiller ses meilleurs subordonnés en seigneurs démons. Benimaru reçoit le titre de « Seigneur de la colère », mais son évolution bloque : il doit d'abord avoir une descendance. Limule annonce donc publiquement son union avec Momiji. Gobta reçoit le « droit » de parler familièrement à son roi. Ranga évolue en dormant, Gabil devient « Roi dragon céleste » et ses Hiryû deviennent de vrais hommes-dragons. Geld refuse l'éveil par esprit d'expiation et reçoit un équipement légendaire. Chez Shion, rien ne change, mais ce sont ses Yomigaeri qui évoluent."},
+ {arc:9, id:"c163", n:"163", t:"Récompenses et évolution (2)", p:5178, scene:"golden", sfx:"ÉVEIL", who:["Diablo","Venom","Kumara","Zegion","Apito"],
+  s:"Diablo devient seigneur démon et maîtrise sa nouvelle puissance en un instant ; Venom passe duc démon et ses cent soldats deviennent des chevaliers démons. Kumara, petite renarde recueillie autrefois, devient une souveraine aux neuf queues dorées. Zegion transforme sa carapace en acier divin et obtient une compétence ultime d'illusion. Il transmet sa bénédiction à Apito, qui renaît en reine."},
+ {arc:9, id:"c164", n:"164", t:"Récompenses et évolution (3)", p:5200, scene:"undead", sfx:"HONNEUR", who:["Adalman","Albert","Ramiris","Testarossa","Ultima","Carrera"],
+  s:"Adalman refuse l'éveil tant qu'il n'a pas effacé sa défaite. Albert reçoit l'armure divine prise à Calgurio, qui lui donne temporairement une forme spirituelle. Le dragon d'Adalman est nommé Wenti et prend forme humaine. Michelle et Raymond sont entièrement ressuscités, et les quatre rois dragons de Ramiris reçoivent des noms. Testarossa, Ultima et Carrera attendront leur éveil, mais reçoivent chacune un titre. Limule a désormais douze « Seigneurs » à ses côtés."},
+ {arc:9, id:"c165", n:"165", t:"Des engrenages déréglés", p:5233, scene:"empire", sfx:"TIC TAC", who:["Yûki","Kagali","Kondô","Guy","Velzard"],
+  s:"Yûki apprend que l'armée impériale a été anéantie sans un survivant. Puisque les corps blindé et des bêtes sont loin, il prépare un coup d'État avec Kagali. Miranda, de retour, tente de fuir la capitale ; le lieutenant Kondô lit ses pensées d'un simple contact et l'abat. Pendant ce temps, Dino a tout raconté à Guy Crimson. Intrigué par la montée en puissance de Limule, Guy part pour Tempest avec Velzard, la sœur glaciale de Veldora."},
+ {arc:9, id:"c166", n:"166", t:"Coup d'État dans la capitale", p:5263, scene:"empire", sfx:"TRAÎTRE !", who:["Yûki","Kagali","Damrada"],
+  s:"Yûki réunit trois cents fidèles pour tuer l'Empereur. Mais Damrada révèle la vérité : il a toujours servi l'Empereur, et Cerberus comme l'Association n'étaient que des outils de l'Empire. D'un seul coup d'arts martiaux, il met Kagali, ancien seigneur démon, à genoux. Par loyauté envers Yûki, il décide de l'affronter lui-même."},
+ {arc:9, id:"c167", n:"167", t:"Le tournant d'une époque", p:5289, scene:"death", sfx:"PAN", who:["Chloé","Velgrynd","Damrada","Kondô","Yûki"],
+  s:"Claude, le chevalier de Leon libéré par Chloé, fait croire à sa mort et rejoint son maître. L'empereur Rudra lâche Velgrynd sur les rebelles, puis sur Luminus et Limule. Damrada et Yûki s'affrontent à mains nues ; Damrada est protégé par un pouvoir accordé par l'Empereur. Kondô, chef des chevaliers impériaux, abat alors Yûki d'une balle dans le dos et efface son corps. Les rebelles sont écrasés et une pluie rouge tombe sur la capitale."},
+ {arc:9, id:"c168", n:"168", t:"Guy Crimson", p:5331, scene:"abyss", sfx:"BOUM !", who:["Limule","Guy","Testarossa","Ultima","Carrera","Luminus"],
+  s:"Limule prévient Luminus et Hinata que des dirigeables impériaux approchent de leurs terres, et leur envoie Arnaud en renfort. Soudain, Guy Crimson atterrit dans l'arène à une vitesse folle et fend le sol. Testarossa, Ultima et Carrera l'attaquent ; il les met à terre d'un seul sort. Guy n'est pas venu se battre : il veut comprendre pourquoi tant de seigneurs démons viennent de s'éveiller à Tempest."},
+ {arc:9, id:"c169", n:"169", t:"Négociations avec Guy", p:5360, scene:"cake", sfx:"SLURP", who:["Limule","Guy"],
+  s:"Autour d'un thé et de gâteaux, Guy avoue qu'il soupçonnait Limule d'être un pion de Rudra, son adversaire dans une partie d'échecs vieille de deux mille ans. Il découvre que Limule est un réincarné. Raphael fait passer les éveils pour un simple pouvoir de Belzébuth et obtient de Guy 500 000 âmes, de quoi éveiller ses deux servantes… et garder un surplus pour Tempest. Guy, lui, exige surtout la recette du gâteau."},
+ {arc:9, id:"c170", n:"170", t:"Un thé agréable", p:5393, scene:"cake", sfx:"BRRR", who:["Ramiris","Guy","Velzard","Veldora"],
+  s:"Ramiris annonce que Veldora est parti précipitamment « aider Luminus ». La vraie raison arrive : Velzard, sa sœur aînée, qu'il fuit depuis toujours. La visite se termine en bons termes, et Guy repart après cinq parts de gâteau. Limule éveille enfin Testarossa, Ultima et Carrera, qui deviennent des seigneurs démons, et leurs subordonnés montent tous en grade. Sur les écrans, Veldora fonce droit sur la flotte impériale… où se trouve son autre sœur, Velgrynd."},
+ {arc:9, id:"c171", n:"171", t:"Choc des dragons (1)", p:5421, scene:"sky", sfx:"FWOOOSH", who:["Veldora","Velgrynd","Gladim"],
+  s:"Plus rapide que jamais grâce à son entraînement, Veldora somme la flotte de faire demi-tour. Velgrynd, qui voyageait incognito, prend sa forme de dragon écarlate, gardienne de l'Empire. Son plan : épuiser son petit frère pour que Rudra puisse le contrôler. Le combat qui commence changera durablement cette région de l'océan."},
+ {arc:9, id:"c172", n:"172", t:"Choc des dragons (2)", p:5450, scene:"sky", sfx:"KRAKOOM", who:["Veldora","Velgrynd","Kondô","Rudra","Limule"],
+  s:"Veldora esquive tout et s'échappe même de la cage de feu de sa sœur ; il prend l'avantage. Mais Rudra et ses chevaliers interviennent : Kondô tire une balle maudite, les annulateurs de magie entrent en action et Rudra prend le contrôle de Veldora. Limule sent son lien d'âme avec son ami se briser. Fou de rage, il se téléporte sur place."},
+ {arc:9, id:"c173", n:"173", t:"Rage", p:5473, scene:"lightning", sfx:"GRRAAAH", who:["Limule","Diablo","Testarossa","Ultima","Carrera","Rudra"],
+  s:"Pendant que ses cadres achèvent leur évolution et lui transmettent leur force, Limule arrive seul devant la flotte. Rudra le méprise, mais Damrada, Kondô et Velgrynd sentent le danger. D'une lame de vent, Limule coupe plusieurs dirigeables et bloque sans effort les attaques des chevaliers. Puis il ouvre un portail et fait venir Diablo, les trois démones et toutes les Black Numbers : « Occupez-les pendant que je libère Veldora. »"},
+ {arc:9, id:"c174", n:"174", t:"Limule contre deux dragons", p:5502, scene:"sky", sfx:"CLASH", who:["Limule","Veldora","Velgrynd"],
+  s:"Veldora, contrôlé, attaque. Raphael calcule mal une esquive, et Limule lui demande de ressentir plutôt que de calculer, puis lui confie Velgrynd : pour la première fois, Raphael éprouve quelque chose comme de la joie. Limule absorbe l'attaque la plus puissante de Velgrynd, que Raphael enferme dans une prison pour trois minutes. Au contact de Veldora, Limule découvre que son ami est toujours conscient : il a coupé lui-même leur lien pour protéger Limule de la malédiction."},
+ {arc:9, id:"c175", n:"175", t:"Veldora libéré", p:5528, scene:"revival", sfx:"RENAISSANCE", who:["Limule","Veldora","Velgrynd"],
+  s:"Limule dévore le corps contrôlé du dragon tempête, malgré une douleur qu'il n'avait jamais ressentie. Raphael lui propose alors de reconstruire son propre corps en « vrai dragon ». Limule accepte et devient le cinquième vrai dragon, un slime ultime à l'apparence d'une adolescente aux yeux dorés. Le lien d'âme avec Veldora est rétabli. Velgrynd brise sa prison, convaincue que Limule a tué son frère."},
+ {arc:9, id:"c176", n:"176", t:"L'épée de Tempest", p:5562, scene:"forge", sfx:"SHHHAAAK", who:["Limule","Veldora","Velgrynd","Rudra"],
+  s:"Limule cristallise toute la puissance de Veldora dans son katana. Un simple geste du poignet fend le ciel, tranche les ailes de Velgrynd, coupe des dirigeables… et ouvre la mer en deux : Veldora a mis beaucoup trop de force. Le contrôle de Rudra est brisé, et l'Empereur hurle de rage de voir sa victoire contre Guy lui échapper."},
+ {arc:9, id:"c177", n:"177", t:"Les Black Numbers", p:5587, scene:"abyss", sfx:"EN CHASSE", who:["Diablo","Testarossa","Ultima","Carrera","Gladim"],
+  s:"Gladim ordonne une fusion interdite entre ses soldats et leurs bêtes : beaucoup meurent ou deviennent fous, mais 550 chevaliers chimères naissent. Diablo distribue les cibles : Testarossa s'occupe des vaisseaux posés sur la mer, Carrera de l'homme en uniforme, Ultima des autres chevaliers. Lui préfère observer son maître. L'Empereur reste intouchable tant que ses fidèles l'entourent."},
+ {arc:9, id:"c178", n:"178", t:"Black Numbers contre l'Empire (1)", p:5615, scene:"death", sfx:"ZAP", who:["Testarossa","Venom","Gladim","Ultima","Carrera"],
+  s:"Testarossa balaie les navires d'un rayon de mort, puis tranche Gladim d'un seul coup avant qu'il ait fini de crier le nom de son attaque. Un mystérieux soldat dévore alors le cadavre de Gladim et revêt son armure divine. Sur le vaisseau impérial, Rudra traite Ultima et Carrera d'« insectes » : les deux démones entrent dans une colère noire."},
+ {arc:9, id:"c179", n:"179", t:"Black Numbers contre l'Empire (2)", p:5643, scene:"hell", sfx:"SSSSS", who:["Ultima","Damrada","Carrera","Kondô"],
+  s:"Ultima lance des sphères de magie noire qui se changent en tentacules empoisonnés : la moitié des chevaliers impériaux meurt. Elle affronte ensuite Damrada. Carrera, d'abord dominée par Kondô, comprend qu'elle sous-estimait les humains et prend le combat au sérieux. Kondô revêt son uniforme de classe divine ; Carrera éveille une compétence ultime de destruction."},
+ {arc:9, id:"c180", n:"180", t:"Duel sur le pont", p:5676, scene:"forge", sfx:"SLASH ×8", who:["Agera","Esprit","Veyron","Zonda"],
+  s:"Quand un chevalier insulte Limule, Agera dégaine enfin et le tranche huit fois en un éclair : elle se souvient d'avoir été samouraï dans une autre vie. Esprit renvoie toutes ses blessures à son adversaire. Veyron, en grande difficulté face à un vieux héros maître de la lance, reçoit l'aide de Zonda, qui se transforme en arme ; Veyron copie la technique de son adversaire et le pulvérise."},
+ {arc:9, id:"c181", n:"181", t:"Vers l'acte final", p:5703, scene:"empire", sfx:"FLAMMES", who:["Moss","Testarossa","Ultima","Damrada","Carrera","Kondô"],
+  s:"Moss surveille tout avec ses clones et piste un mystérieux « rat ». Testarossa incinère soixante dirigeables. Ultima finit par vaincre Damrada ; mourant, il révèle que Rudra lui avait ordonné de trouver quelqu'un capable de le tuer avant que sa compétence ne le rende fou. Ultima accepte cette dernière volonté. Carrera, privée d'un bras, lance sa magie la plus puissante ; Kondô protège le vaisseau au prix de son corps."},
+ {arc:9, id:"c182", n:"182", t:"La volonté transmise", p:5737, scene:"death", sfx:"PROMESSE", who:["Kondô","Carrera"],
+  s:"Kondô et Carrera, épuisés, se battent presque à mains nues quand le faux Gradim surgit, transperce Kondô, lui arrache le cœur et frappe Carrera par surprise avant de s'enfuir. Mourant, Kondô se souvient de sa promesse : tuer Rudra si sa compétence prenait le dessus. Il confie son arme et son âme à Carrera par un pacte. Carrera, plus forte, part se venger."},
+ {arc:9, id:"c183", n:"183", t:"Le pacte", p:5770, scene:"sky", sfx:"GLOUP", who:["Limule","Velgrynd","Veldora"],
+  s:"Limule domine Velgrynd mais ne veut pas tuer la sœur de son ami. Veldora, qui refuse de lui parler, suggère de l'avaler elle aussi. Limule l'enferme et la dévore. Elle cesse de résister en voyant le vaisseau de Rudra s'enfuir sans elle : l'Empereur est « brisé ». Apprenant que Veldora est vivant, elle accepte un pacte : aider Limule si celui-ci libère l'âme de Rudra, rongé depuis deux mille ans par sa compétence."},
+ {arc:9, id:"c184", n:"184", t:"Face-à-face", p:5805, scene:"eyes", sfx:"BANG", who:["Limule","Vega","Yûki","Chloé","Carrera"],
+  s:"Le « rat » est Vega, déguisé en Gradim. Il emmène Rudra dans la capitale, où l'attend Yûki, bien vivant : Chloé l'a ressuscité, et il ne lui reste plus qu'un ordre à lui donner. Vega pousse l'Empereur à invoquer l'armée des anges, mais Carrera surgit et emprisonne son âme d'une balle. Limule interpelle Yûki, caché dans l'ombre."},
+ {arc:9, id:"c185", n:"185", t:"Le début d'une nouvelle partie", p:5834, scene:"revival", sfx:"ANGES", who:["Limule","Yûki","Rudra","Ultima","Diablo","Chloé"],
+  s:"Manipulé, Rudra déclenche l'armée des anges, et Yûki lui vole sa compétence malgré Diablo. En Yûki s'éveille une autre personnalité froide, Angra Mainyu. Les anges prennent les corps des soldats morts et d'un tiers des habitants de la capitale. Kagali et Vega renaissent. Yûki lance un défi : dans un mois commencera une partie dont l'enjeu sera le monde. Il envoie Chloé occuper Guy et disparaît. Velgrynd brûle le corps de Rudra, et Limule prend en main la capitale de l'Empire."},
+ {arc:9, id:"i3", n:"Interlude", t:"Guy Crimson", p:5882, scene:"abyss", sfx:"SOUVENIRS", who:["Guy","Velzard","Rudra","Velgrynd"],
+  s:"Il y a des millénaires, un démon invoqué récolte assez d'âmes pour devenir seigneur démon. Vaincu par Veldanava, le dragon créateur du monde, il accepte de devenir l'« arbitre » chargé d'empêcher l'humanité de s'autodétruire. Velzard le rejoint. Un jour arrive Rudra, un héros qui lui donne son nom complet, Guy Crimson. Leurs combats deviennent une amitié, puis un « jeu » pour la domination du monde. Après la mort de sa sœur Lucia et de Veldanava, Rudra s'endurcit peu à peu, et Guy pleure son ancien ami."}
 ];
+
+const ARCS = {
+ 8: {k:"Arc 8 · PDF p. 4283–5137 · fichier 08", t:"L'Empire envahit !", d:"Un an après la fuite de Yûki, l'Empire de l'Est lance son armée contre Tempest."},
+ 9: {k:"Arc 9 · PDF p. 5138–5919 · fichier 09", t:"Le choc du dragon et du démon", d:"Les subordonnés de Limule deviennent seigneurs démons, Guy Crimson s'invite, et deux vrais dragons s'affrontent au-dessus de l'océan."}
+};
 
 const GLOSS = [
  ["Rimuru Tempest","Limule Tempest","Le héros, slime réincarné, seigneur démon de Tempest",1],
@@ -297,7 +348,13 @@ function saveRead(set){ try { localStorage.setItem(LS, JSON.stringify([...set]))
 let READ = loadRead();
 
 const host = document.getElementById("planches");
-host.innerHTML = CH.map(c => `
+let lastArc = null;
+host.innerHTML = CH.map(c => {
+  let head = "";
+  if (c.arc !== lastArc) { lastArc = c.arc; const a = ARCS[c.arc];
+    const n = CH.filter(x => x.arc === c.arc).length;
+    head = `<div class="arc-head" id="arc${c.arc}"><div class="kicker">${a.k} · ${n} planches</div><h2>${a.t}</h2><p>${a.d}</p></div>`; }
+  return head + `
   <article class="planche${READ.has(c.id) ? " read" : ""}" id="${c.id}">
     <div class="panel"><canvas data-scene="${c.scene}" data-seed="${c.p}" aria-hidden="true"></canvas>
       <div class="sfx">${c.sfx}</div><div class="chnum">${c.n === "Interlude" ? "INTERLUDE" : "CH. " + c.n}</div></div>
@@ -309,7 +366,8 @@ host.innerHTML = CH.map(c => `
         <button class="mark" type="button" data-id="${c.id}" aria-pressed="${READ.has(c.id)}">${READ.has(c.id) ? "Lu ✓" : "Marquer lu"}</button>
       </div>
     </div>
-  </article>`).join("");
+  </article>`; }).join("");
+document.getElementById("arcNav").innerHTML = Object.keys(ARCS).map(k => `<a class="chip" href="#arc${k}">Arc ${k} · ${ARCS[k].t}</a>`).join("");
 
 function refresh(){
   const n = CH.filter(c => READ.has(c.id)).length;
@@ -476,6 +534,13 @@ const SCENES = {
       const g = x.createLinearGradient(-w*.6, 0, w*.6, 0); g.addColorStop(Math.max(0, p - .1), "rgba(0,0,0,0)"); g.addColorStop(p, k.gold); g.addColorStop(Math.min(1, p + .1), "rgba(0,0,0,0)");
       x.fillStyle = g; x.fillRect(-w*.6, -h*.01, w*1.2, h*.02); x.restore(); }
     x.globalAlpha = 1; x.strokeStyle = k.gold; x.lineWidth = h*.01; x.beginPath(); x.moveTo(w*.5, h*.2); x.lineTo(w*.56, h*.5); x.lineTo(w*.5, h*.8); x.lineTo(w*.44, h*.5); x.closePath(); x.stroke(); },
+  sky(x,w,h,t,k){ const g = x.createLinearGradient(0,0,0,h); g.addColorStop(0, "#0d1b2a"); g.addColorStop(1, "#1d3b53"); x.fillStyle = g; x.fillRect(0,0,w,h);
+    x.fillStyle = "#0a2233"; x.fillRect(0, h*.78, w, h*.22);
+    for (let s2 = 0; s2 < 2; s2++){ const cx = w*(s2 ? .68 : .32) + Math.sin(t + s2*3)*w*.03, cy = h*.42 + Math.cos(t*1.3 + s2)*h*.04, col = s2 ? k.war : k.acc;
+      for (let i = 0; i < 6; i++){ x.strokeStyle = col; x.globalAlpha = .9 - i*.13; x.lineWidth = h*.018; x.beginPath();
+        x.arc(cx, cy, h*(.06 + i*.045), t*(s2 ? -2 : 2) + i, t*(s2 ? -2 : 2) + i + 3.6); x.stroke(); } }
+    x.globalAlpha = 1; const ph = (t*.8) % 1; x.fillStyle = k.sheet; x.globalAlpha = 1 - ph; x.beginPath(); x.arc(w*.5, h*.42, h*(.03 + ph*.25), 0, 7); x.fill(); x.globalAlpha = 1;
+    x.strokeStyle = k.sheet; x.globalAlpha = .35; for (let r0 = 0; r0 < 5; r0++){ x.beginPath(); x.moveTo(0, h*(.82 + r0*.035)); for (let xx = 0; xx <= w; xx += w/20) x.lineTo(xx, h*(.82 + r0*.035) + Math.sin(xx*.02 + t*2 + r0)*h*.008); x.stroke(); } x.globalAlpha = 1; },
   gravity(x,w,h,t,k){ x.fillStyle = k.paper; x.fillRect(0,0,w,h); const cx = w*.5, cy = h*.5, ph = (t*.3) % 1;
     for (let i = 0; i < 6; i++){ const p = 1 - (ph + i/6) % 1; x.strokeStyle = k.ink; x.globalAlpha = .2 + .8*(1-p); x.lineWidth = h*.012; x.beginPath(); x.ellipse(cx, cy, p*w*.55, p*h*.45, 0, 0, 7); x.stroke(); }
     x.globalAlpha = 1; const r = rnd(66); for (let i = 0; i < 50; i++){ const a = r()*7, d0 = r(), p = 1 - ((ph*1.3 + d0) % 1); x.fillStyle = i % 5 ? k.soft : k.war;
