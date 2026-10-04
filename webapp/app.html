@@ -142,6 +142,7 @@ td.vf { font-weight: 600; }
     <button class="tab" role="tab" id="tab-read" aria-selected="true" aria-controls="view-read" type="button">Résumés</button>
     <button class="tab" role="tab" id="tab-gloss" aria-selected="false" aria-controls="view-gloss" type="button">Glossaire VF</button>
     <button class="tab" role="tab" id="tab-where" aria-selected="false" aria-controls="view-where" type="button">Où s'arrête l'anime</button>
+    <button class="tab" role="tab" id="tab-manga" aria-selected="false" aria-controls="view-manga" type="button">Manga et adaptations</button>
   </nav>
 
   <section id="view-read" role="tabpanel" aria-labelledby="tab-read" style="display:grid;gap:28px">
@@ -176,6 +177,32 @@ td.vf { font-weight: 600; }
       <p>Le web novel et le light novel ne racontent pas toujours la même chose. Les intrigues de Mariabell et des ruines d'Amalita n'existent que dans le light novel. Attends-toi aussi à des scènes réordonnées.</p>
     </div>
     <p class="foot">Correspondances établies à partir des titres de chapitres du light novel (traduction de fans sur tensurafan.github.io) et des titres d'épisodes. La liste officielle des épisodes n'a pas pu être vérifiée.</p>
+  </section>
+
+  <section id="view-manga" role="tabpanel" aria-labelledby="tab-manga" hidden style="display:grid;gap:14px">
+    <div class="bridge">
+      <div class="stamp">Le manga principal</div>
+      <h2>Moi, quand je me réincarne en Slime</h2>
+      <p>Dessin de Taiki Kawakami, d'après l'histoire de Fuse. La série paraît depuis 2015 dans le <i>Monthly Shōnen Sirius</i> (Kodansha) et elle est toujours en cours. En France, elle est publiée chez Kurokawa.</p>
+      <p>Le manga suit les <b>light novels</b>, pas le web novel résumé dans cette appli. Les grandes lignes sont proches, mais les détails divergent souvent après les premiers arcs.</p>
+      <p><b>Il avance moins vite que l'anime</b> : pour connaître la suite de la saison 4, passe par les résumés de l'onglet « Résumés » ou par les light novels.</p>
+    </div>
+    <div class="bridge">
+      <div class="stamp">Les séries dérivées</div>
+      <h2>Des histoires parallèles, pas la suite</h2>
+      <p><b>Tensura Nikki</b> : le quotidien comique de Tempest. Il a aussi été adapté en anime (<i>The Slime Diaries</i>).</p>
+      <p><b>The Ways of the Monster Nation</b> : la découverte de Tempest par une jeune guide.</p>
+      <p><b>Trinity in Tempest</b> : Milim, Frey et Carillon pendant leur séjour à Tempest.</p>
+      <p><b>Clayman ReVenge</b> : Clayman et les clowns modérés, à côté des événements principaux.</p>
+    </div>
+    <div class="bridge">
+      <div class="stamp">Les autres formats</div>
+      <h2>Lire ou regarder autrement</h2>
+      <p><b>Le web novel</b> : la version d'origine, gratuite, terminée. C'est elle que résume cette appli, jusqu'à l'épilogue.</p>
+      <p><b>Les light novels</b> : la version réécrite et « officielle » de l'histoire, encore en cours au Japon.</p>
+      <p><b>L'anime</b> : quatre saisons, l'anime dérivé <i>The Slime Diaries</i>, et au moins un film, <i>Scarlet Bond</i> (2022).</p>
+    </div>
+    <p class="foot">Informations rassemblées sans pouvoir consulter les sites des éditeurs : vérifie le nombre de tomes et les titres disponibles en français dans le catalogue de Kurokawa.</p>
   </section>
 
   <p class="foot">Les résumés sont écrits pour cette page : ils racontent l'histoire, ils ne reproduisent pas le texte du roman. Les illustrations sont des scènes originales, sans les personnages officiels. Ta progression reste dans ce navigateur.</p>
@@ -563,7 +590,7 @@ document.getElementById("resumeBtn").addEventListener("click", () => {
 refresh();
 
 /* Tabs */
-const TABS = ["read","gloss","where"];
+const TABS = ["read","gloss","where","manga"];
 function selectTab(k){
   TABS.forEach(t => {
     document.getElementById("tab-" + t).setAttribute("aria-selected", t === k);
